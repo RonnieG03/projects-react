@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 
+const CAT_PREFIX_IMAGE_URL = 'https://cataas.com'
+
 export function useCatImage ({ fact }) {
     const [imageUrl, setImageUrl] = useState()
     
@@ -8,7 +10,6 @@ export function useCatImage ({ fact }) {
         if(!fact) return
         
         const threeFirsttWord = fact.split(' ', 3).join(' ')
-        console.log(threeFirsttWord)
 
         fetch(`https://cataas.com/cat/says/${threeFirsttWord}?size=50&color=red&json=true`)
             .then(res => res.json())
@@ -18,5 +19,5 @@ export function useCatImage ({ fact }) {
             })
     }, [fact])
 
-    return{ imageUrl }
+    return { imageUrl: `${CAT_PREFIX_IMAGE_URL}${imageUrl}` }
 }
